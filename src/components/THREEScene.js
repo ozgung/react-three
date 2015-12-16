@@ -32,6 +32,7 @@ var THREEScene = React.createClass({
 
     getDefaultProps() {
         return {
+            effect: undefined, // An effect like THREE.StereoEffect.
             enableRapidRender: true,
             pixelRatio: 1,
             transparent: false,
@@ -129,6 +130,11 @@ var THREEScene = React.createClass({
                 "the scene component must be a number, not " + backgroundtype);
             this._THREErenderer.setClearColor(props.background, this.props.transparent ? 0 : 1);
         }
+
+        if (props.effect !== undefined) {
+                  this._effect = new props.effect(this._THREErenderer);
+                  this._effect.setSize(props.width, props.height)
+                }
 
         this._THREEcamera = camera;
 
@@ -251,6 +257,11 @@ var THREEScene = React.createClass({
 
     renderScene() {
         this._THREErenderer.render(this._THREEObject3D, this._THREEcamera);
+        if (this._effect !== undefined) {
+          this._effect.render(this._THREEObject3D, this._THREEcamera);
+        } else {
+          this._THREErenderer.render(this._THREEObject3D, this._THREEcamera);
+        }
     },
 
     render() {
