@@ -256,7 +256,7 @@ var THREEScene = React.createClass({
     },
 
     renderScene() {
-        this._THREErenderer.render(this._THREEObject3D, this._THREEcamera);
+        //this._THREErenderer.render(this._THREEObject3D, this._THREEcamera);
         if (this._effect !== undefined) {
           this._effect.render(this._THREEObject3D, this._THREEcamera);
         } else {
